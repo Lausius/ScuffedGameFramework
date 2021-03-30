@@ -1,4 +1,6 @@
 ﻿using ScuffedGameFramework.Items;
+using ScuffedGameFramework.Items.Armor;
+using ScuffedGameFramework.Items.Weapons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,10 @@ namespace ScuffedGameFramework
 {
     public abstract class Creature : ICreature
     {
+
+        #region Properties
         public int HitPoints { get; set; }
         public string Name { get; set; }
-        //public IEnumerable<IItems> Inventory { get; set; }
         public bool Dead
         {
             get
@@ -24,6 +27,10 @@ namespace ScuffedGameFramework
         public int AttackPower { get; set; }
         public int Defense { get; set; }
 
+        // Should maybe be a list?
+        public IWeapon CurrentWeapon { get; set; } = null;
+        public IArmor CurrentArmor { get; set; } = null;
+        #endregion
 
         /// <summary>
         /// Initialize creature from xml configuration file.
@@ -33,37 +40,31 @@ namespace ScuffedGameFramework
 
         }
 
-        public Creature(string name, int hitPoints = 100, int attackPower = 10)
-        {
-            Name = name;
-            HitPoints = hitPoints;
-            AttackPower = attackPower;
-        }
 
-        /// <summary>
-        /// Template method.
-        /// </summary>
-        /// <param name="creature"></param>
+
+        #region Behavior
+
         public void Hit(ICreature creature)
         {
             creature.HitPoints -= AttackPower;
+            Console.WriteLine($"{Name} has hit {creature.Name} for {AttackPower} damage. {creature.Name} has {creature.HitPoints} HP left.");
         }
 
-        //public void Loot(ICreature creature)
-        //{
-        //    foreach (var item in creature.Inventory)
-        //    {
-        //        Inventory.Append(item);
-        //    }
-        //}
-
-        /// <summary>
-        /// Template method.
-        /// </summary>
-        /// <param name="creature"></param>
         public void ReceiveHit(ICreature creature)
         {
-            HitPoints = HitPoints - creature.AttackPower;
+            HitPoints -= creature.AttackPower;
+            Console.WriteLine($"{creature.Name} has hit {Name} for {creature.AttackPower} damage. Remaining health is {HitPoints}.");
         }
+
+        public void EngageFight(ICreature enemyCreature)
+        {
+            while (!Dead && !enemyCreature.Dead)
+            {
+                Hit(enemyCreature);
+                ReceiveHit(enemyCreature);
+            }
+        }
+
+        #endregion
     }
 }

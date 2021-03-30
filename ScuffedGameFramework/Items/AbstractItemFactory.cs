@@ -1,11 +1,12 @@
-﻿using ScuffedGameFramework.Items.Weapons;
+﻿using ScuffedGameFramework.Items.Armor;
+using ScuffedGameFramework.Items.Weapons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScuffedGameFramework.Items.Armor
+namespace ScuffedGameFramework.Items
 {
     /// <summary>
     /// This class is used to create items.
