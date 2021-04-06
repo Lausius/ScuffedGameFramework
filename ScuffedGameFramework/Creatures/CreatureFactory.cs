@@ -22,9 +22,9 @@ namespace ScuffedGameFramework.Creatures
             MonsterList.Add(player);
         }
 
-        public Creature CreateCreature(CreatureRace race)
+        public Creature CreateCreature()
         {
-            switch (race)
+            switch (GenerateRace())
             {
                 case CreatureRace.Beast:
                     Creature bear = new Bear(GeneratePosition());
@@ -61,10 +61,13 @@ namespace ScuffedGameFramework.Creatures
             {
                 throw new Exception("The world is too small for so many monsters.");
             }
-
             return pos;
+        }
 
-
+        private CreatureRace GenerateRace()
+        {
+            var enums = Enum.GetValues(typeof(CreatureRace));
+            return (CreatureRace)enums.GetValue(rnd.Next(enums.Length));
         }
 
     }

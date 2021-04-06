@@ -13,12 +13,9 @@ namespace GameTest
             World world = new World(20, 20);
             Creature player = new PlayerHero("Lausius");
             CreatureFactory creatureFactory = new CreatureFactory(world, player);
-            for (int i = 0; i < 80; i++)
+            for (int i = 0; i < (world.MaxX * world.MaxY) / 10; i++)
             {
-                creatureFactory.CreateCreature(CreatureRace.Beast);
-                creatureFactory.CreateCreature(CreatureRace.Humanoid);
-                creatureFactory.CreateCreature(CreatureRace.Troll);
-                creatureFactory.CreateCreature(CreatureRace.Undead);
+                creatureFactory.CreateCreature();
             }
 
             world.DrawSquareWorld();
