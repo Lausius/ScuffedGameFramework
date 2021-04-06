@@ -20,6 +20,10 @@ namespace ScuffedGameFramework.Creatures.ConcreteCreatures
             CurrentArmor = _itemAbstractFactory.GenerateArmor();
             AttackPower += CurrentWeapon.Damage;
             Defense += CurrentArmor.Defense;
+
+            Position = new Position(1, 1);
+            Color = ConsoleColor.Green;
+            WorldMarker = "O";
         }
     }
 }

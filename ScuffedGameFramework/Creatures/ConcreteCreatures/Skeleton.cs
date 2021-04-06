@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace ScuffedGameFramework.Creatures.ConcreteCreatures
 {
-    public class Skeleton : Creature
+    public class Skeleton : Monster
     {
-        public Skeleton()
+        public Skeleton(Position spawnPoint) : base(spawnPoint)
         {
             Name = "Old Skeleton";
             HitPoints = 50;

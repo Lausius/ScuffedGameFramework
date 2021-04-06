@@ -15,6 +15,13 @@ namespace ScuffedGameFramework
         #region Properties
         public int HitPoints { get; set; }
         public string Name { get; set; }
+
+        #region WorldProperties
+        public Position Position { get; set; }
+        public ConsoleColor Color { get; set; }
+        public string WorldMarker { get; set; }
+        #endregion
+
         public bool Dead
         {
             get
@@ -40,7 +47,13 @@ namespace ScuffedGameFramework
 
         }
 
-
+        public void DrawCreature()
+        {
+            Console.ForegroundColor = Color;
+            Console.SetCursorPosition(Position.X, Position.Y);
+            Console.Write(WorldMarker);
+            Console.ResetColor();
+        }
 
         #region Behavior
 
@@ -66,5 +79,10 @@ namespace ScuffedGameFramework
         }
 
         #endregion
+
+        public override string ToString()
+        {
+            return $"This creatures is at position {Position.X},{Position.Y}.";
+        }
     }
 }

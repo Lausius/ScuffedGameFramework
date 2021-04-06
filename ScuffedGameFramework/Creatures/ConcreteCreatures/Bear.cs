@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ScuffedGameFramework.Creatures.ConcreteCreatures
 {
-    public class Bear : Creature
+    public class Bear : Monster
     {
-        public Bear()
+        public Bear(Position spawnPoint) : base(spawnPoint)
         {
             Name = "Black Bear";
             HitPoints = 60;

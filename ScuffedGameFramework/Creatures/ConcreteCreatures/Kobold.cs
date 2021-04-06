@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ScuffedGameFramework.Creatures.ConcreteCreatures
 {
-    public class Kobold : Creature
+    public class Kobold : Monster
     {
-        public Kobold()
+        public Kobold(Position spawnPoint) : base(spawnPoint)
         {
             Name = "Greedy Kobold";
             HitPoints = 40;

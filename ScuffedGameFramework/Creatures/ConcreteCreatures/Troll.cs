@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ScuffedGameFramework.Creatures.ConcreteCreatures
 {
-    public class Troll : Creature
+    public class Troll : Monster
     {
-        public Troll()
+        public Troll(Position spawnPoint) : base(spawnPoint)
         {
             Name = "Green Troll";
             HitPoints = 80;
