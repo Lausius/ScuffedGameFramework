@@ -13,8 +13,7 @@ namespace GameTest
             World world = new World(20, 20);
             Creature player = new PlayerHero("Lausius");
             CreatureFactory creatureFactory = new CreatureFactory(world, player);
-            //List<Creature> creatureList = new List<Creature>();
-            for (int i = 0; i < 85; i++)
+            for (int i = 0; i < 80; i++)
             {
                 creatureFactory.CreateCreature(CreatureRace.Beast);
                 creatureFactory.CreateCreature(CreatureRace.Humanoid);
@@ -22,17 +21,19 @@ namespace GameTest
                 creatureFactory.CreateCreature(CreatureRace.Undead);
             }
 
-            //Creature skeleton = new Skeleton(new Position(5, 5));
-            //Console.WriteLine(player.AttackPower);
-            //Console.WriteLine(player.CurrentArmor.Name);
-            //Console.WriteLine(player.CurrentWeapon.Name);
-            //player.EngageFight(skeleton);
             world.DrawSquareWorld();
             player.DrawCreature();
             foreach (var creature in creatureFactory.MonsterList)
             {
                 creature.DrawCreature();
             }
+
+            //var list = creatureFactory.MonsterList.FindAll(i => i.Position.X == 1);
+
+            //foreach (var item in list)
+            //{
+            //    Console.WriteLine(item);
+            //}
 
             Console.ReadLine();
         }

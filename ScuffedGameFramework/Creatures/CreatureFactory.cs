@@ -51,18 +51,20 @@ namespace ScuffedGameFramework.Creatures
         {
             Position pos = new Position(rnd.Next(1, _world.MaxX - 1), rnd.Next(1, _world.MaxY - 1));
 
-            if (MonsterList.Contains(MonsterList.Find(i => i.Position.Equals(pos))))
+
+            while (MonsterList.Exists(i => i.Position.Equals(pos)))
             {
-                //throw new Exception("FUCK MIG");
-                // MonsterList.Count ... count må ikke være over worldmaxX * worldmaxy 
-                if (MonsterList.Count > (_world.MaxX - 1) * (_world.MaxY - 1))
-                {
-                    throw new Exception("The world is too small for so many monsters.");
-                }
-                GeneratePosition();
+                pos = new Position(rnd.Next(1, _world.MaxX - 1), rnd.Next(1, _world.MaxY - 1));
+            }
+
+            if (MonsterList.Count > (_world.MaxX - 1) * (_world.MaxY - 1))
+            {
+                throw new Exception("The world is too small for so many monsters.");
             }
 
             return pos;
+
+
         }
 
     }
