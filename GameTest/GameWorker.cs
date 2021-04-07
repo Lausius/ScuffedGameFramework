@@ -2,6 +2,7 @@
 using ScuffedGameFramework.Creatures;
 using ScuffedGameFramework.Creatures.ConcreteCreatures;
 using ScuffedGameFramework.Creatures.CreatureDecorators;
+using ScuffedGameFramework.Creatures.PlayerClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,9 @@ namespace GameTest
         public GameWorker()
         {
             _world = new World();
-            _player = new PlayerHero("Lausius");
+            // WILL BE CLASS FACTORY
+            _player = new Warrior("Lausius");
+
             _logger = new JsonTraceListener();
             _creatureFactory = new CreatureFactory(_world, _player, _logger);
             SpawnCreatures(10);

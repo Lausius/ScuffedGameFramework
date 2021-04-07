@@ -14,5 +14,10 @@ namespace ScuffedGameFramework.Creatures
             WorldMarker = "X";
             Color = ConsoleColor.Red;
         }
+
+        public override void FightingStyle(ICreature creature)
+        {
+            HitPoints -= creature.AttackPower - ((Defense / 100) * AttackPower);
+        }
     }
 }

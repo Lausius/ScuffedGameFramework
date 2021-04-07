@@ -5,25 +5,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScuffedGameFramework.Creatures.ConcreteCreatures
+namespace ScuffedGameFramework.Creatures
 {
-    public class PlayerHero : Creature
+    public abstract class Player : Creature
     {
         private readonly IItemAbstractFactory _itemAbstractFactory;
 
-        public PlayerHero(string name)
+        public Player(string name)
         {
-            Name = name;
             _itemAbstractFactory = new AbstractItemFactory();
-            HitPoints = 200;
             CurrentWeapon = _itemAbstractFactory.GenerateWeapon();
             CurrentArmor = _itemAbstractFactory.GenerateArmor();
-            AttackPower += CurrentWeapon.Damage;
-            Defense += CurrentArmor.Defense;
 
             Position = new Position(1, 1);
             Color = ConsoleColor.Green;
             WorldMarker = "O";
         }
+
+        public abstract void CombatText(ICreature creature);
     }
 }

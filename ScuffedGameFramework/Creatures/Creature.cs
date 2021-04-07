@@ -13,9 +13,12 @@ namespace ScuffedGameFramework
     public abstract class Creature : ICreature
     {
         private readonly JsonTraceListener _logger;
+        private IArmor _armor = null;
+        private IWeapon _weapon = null;
 
         #region Properties
         public int HitPoints { get; set; }
+        public string BattleText { get; set; }
         public string Name { get; set; }
 
         #region WorldProperties
@@ -37,8 +40,31 @@ namespace ScuffedGameFramework
         public int Defense { get; set; }
 
         // Should maybe be a list?
-        public IWeapon CurrentWeapon { get; set; } = null;
-        public IArmor CurrentArmor { get; set; } = null;
+        public IWeapon CurrentWeapon
+        {
+            get { return _weapon; }
+            set
+            {
+                _weapon = value;
+                if (_weapon is not null)
+                {
+                    AttackPower = _weapon.Damage;
+                }
+            }
+        }
+
+        public IArmor CurrentArmor
+        {
+            get { return _armor; }
+            set
+            {
+                _armor = value;
+                if (_armor is not null)
+                {
+                    Defense = _armor.Defense;
+                }
+            }
+        }
         #endregion
 
         /// <summary>
@@ -58,21 +84,26 @@ namespace ScuffedGameFramework
         }
 
         #region Behavior
+        public abstract void FightingStyle(ICreature creature);
+        public void LogBattleText(string battleText)
+        {
+            _logger.WriteLine(battleText);
+            Console.WriteLine(battleText);
+        }
 
         public void Hit(ICreature creature)
         {
-            creature.HitPoints -= AttackPower - ((Defense / 100) * AttackPower);
-            string battleText = $"{Name} has hit {creature.Name} for {AttackPower} damage. {creature.Name} has {creature.HitPoints} HP left.";
-            _logger.WriteLine(battleText);
-            Console.WriteLine(battleText);
+            FightingStyle(creature);
+
+            LogBattleText(BattleText);
         }
 
         public void ReceiveHit(ICreature creature)
         {
             HitPoints -= creature.AttackPower - ((Defense / 100) * AttackPower);
+
             string battleText = $"{creature.Name} has hit {Name} for {creature.AttackPower} damage. Remaining health is {HitPoints}.";
-            _logger.WriteLine(battleText);
-            Console.WriteLine(battleText);
+            LogBattleText(battleText);
         }
 
         public void EngageFight(ICreature enemyCreature)

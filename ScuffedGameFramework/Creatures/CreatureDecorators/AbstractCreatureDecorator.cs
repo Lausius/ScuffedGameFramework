@@ -12,6 +12,11 @@ namespace ScuffedGameFramework.Creatures.CreatureDecorators
         public AbstractCreatureDecorator(Creature creature)
         {
             Creature = creature;
+            WorldMarker = creature.WorldMarker;
+            Position = creature.Position;
+            CurrentArmor = creature.CurrentArmor;
+            CurrentWeapon = creature.CurrentWeapon;
+
         }
     }
 }

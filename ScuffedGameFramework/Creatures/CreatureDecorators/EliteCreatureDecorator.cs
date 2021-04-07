@@ -14,8 +14,16 @@ namespace ScuffedGameFramework.Creatures.CreatureDecorators
             HitPoints += 100;
             AttackPower += 5;
             Color = ConsoleColor.Cyan;
-            WorldMarker = creature.WorldMarker;
-            Position = creature.Position;
+
+        }
+
+        public override void FightingStyle(ICreature creature)
+        {
+            for (int i = 0; i == 2; i++)
+            {
+                // hits 2 times cuz boss?
+                HitPoints -= creature.AttackPower - ((Defense / 100) * AttackPower);
+            }
         }
     }
 }

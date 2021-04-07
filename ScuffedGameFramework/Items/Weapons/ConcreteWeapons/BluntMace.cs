@@ -15,7 +15,7 @@ namespace ScuffedGameFramework.Items.Weapons.ConcreteWeapons
 
         public override int Damage
         {
-            get { return 35; }
+            get { return 25; }
         }
     }
 }

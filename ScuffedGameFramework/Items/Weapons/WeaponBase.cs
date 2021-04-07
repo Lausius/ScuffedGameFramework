@@ -10,5 +10,10 @@ namespace ScuffedGameFramework.Items.Weapons
     {
         public abstract string Name { get; }
         public abstract int Damage { get; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
