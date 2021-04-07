@@ -15,9 +15,11 @@ namespace ScuffedGameFramework.Creatures
             Color = ConsoleColor.Red;
         }
 
-        public override void FightingStyle(ICreature creature)
+        public override void FightingStyle(ICreature player)
         {
-            HitPoints -= creature.AttackPower - ((Defense / 100) * AttackPower);
+            player.HitPoints -= AttackPower - ((Defense / 100) * AttackPower);
+            BattleText = $"{Name} has hit {player.Name} for {AttackPower} damage. Remaining health is {player.HitPoints}.";
+
         }
     }
 }

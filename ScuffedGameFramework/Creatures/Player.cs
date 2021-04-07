@@ -22,6 +22,5 @@ namespace ScuffedGameFramework.Creatures
             WorldMarker = "O";
         }
 
-        public abstract void CombatText(ICreature creature);
     }
 }

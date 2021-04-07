@@ -48,7 +48,7 @@ namespace ScuffedGameFramework
                 _weapon = value;
                 if (_weapon is not null)
                 {
-                    AttackPower = _weapon.Damage;
+                    AttackPower += _weapon.Damage;
                 }
             }
         }
@@ -61,7 +61,7 @@ namespace ScuffedGameFramework
                 _armor = value;
                 if (_armor is not null)
                 {
-                    Defense = _armor.Defense;
+                    Defense += _armor.Defense;
                 }
             }
         }
@@ -83,13 +83,13 @@ namespace ScuffedGameFramework
             Console.ResetColor();
         }
 
-        #region Behavior
-        public abstract void FightingStyle(ICreature creature);
         public void LogBattleText(string battleText)
         {
             _logger.WriteLine(battleText);
             Console.WriteLine(battleText);
         }
+        #region Behavior
+        public abstract void FightingStyle(ICreature creature);
 
         public void Hit(ICreature creature)
         {
@@ -98,13 +98,11 @@ namespace ScuffedGameFramework
             LogBattleText(BattleText);
         }
 
-        public void ReceiveHit(ICreature creature)
-        {
-            HitPoints -= creature.AttackPower - ((Defense / 100) * AttackPower);
+        //public void ReceiveHit(ICreature creature)
+        //{
+        //    HitPoints -= creature.AttackPower - ((Defense / 100) * AttackPower);
 
-            string battleText = $"{creature.Name} has hit {Name} for {creature.AttackPower} damage. Remaining health is {HitPoints}.";
-            LogBattleText(battleText);
-        }
+        //}
 
         public void EngageFight(ICreature enemyCreature)
         {
@@ -117,7 +115,7 @@ namespace ScuffedGameFramework
                 // Making sure enemy can't hit back if dead.
                 if (!enemyCreature.Dead)
                 {
-                    ReceiveHit(enemyCreature);
+                    enemyCreature.Hit(this);
                     Thread.Sleep(1000);
                 }
             }

@@ -16,8 +16,7 @@ namespace ScuffedGameFramework.Creatures.ConcreteCreatures
             HitPoints = 50;
             CurrentArmor = new WornShield();
             CurrentWeapon = new LongSword();
-            AttackPower = 10 + CurrentWeapon.Damage;
-            Defense = 5 + CurrentArmor.Defense;
+
             WorldMarker = "S";
         }
     }

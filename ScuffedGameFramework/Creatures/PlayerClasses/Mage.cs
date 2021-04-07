@@ -24,12 +24,8 @@ namespace ScuffedGameFramework.Creatures.PlayerClasses
         public override void FightingStyle(ICreature creature)
         {
             creature.HitPoints -= SpellPower;
-            CombatText(creature);
-        }
-
-        public override void CombatText(ICreature creature)
-        {
             BattleText = $"{Name} has hit {creature.Name} with a fireball for {SpellPower} spell damage. {creature.Name} has {creature.HitPoints} HP left.";
+
         }
     }
 }

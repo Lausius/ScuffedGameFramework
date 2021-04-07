@@ -19,16 +19,14 @@ namespace ScuffedGameFramework.Creatures.ConcreteCreatures
 
         }
 
-        public override void CombatText(ICreature creature)
-        {
-            BattleText = $"{Name} has hit {creature.Name} with a {CurrentWeapon} for {AttackPower} damage. {creature.Name} has {creature.HitPoints} HP left.";
-        }
+
 
         public override void FightingStyle(ICreature creature)
         {
             // maybe implement critical strike :) 
             creature.HitPoints -= AttackPower - ((Defense / 100) * AttackPower);
-            CombatText(creature);
+            BattleText = $"{Name} has hit {creature.Name} with a {CurrentWeapon} for {AttackPower} damage. {creature.Name} has {creature.HitPoints} HP left.";
+
         }
     }
 }
