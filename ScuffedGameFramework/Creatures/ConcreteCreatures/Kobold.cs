@@ -13,6 +13,8 @@ namespace ScuffedGameFramework.Creatures.ConcreteCreatures
             Name = "Greedy Kobold";
             HitPoints = 40;
             AttackPower = 10;
+            WorldMarker = "K";
+
         }
     }
 }

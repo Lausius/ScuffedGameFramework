@@ -1,4 +1,5 @@
 ﻿using ScuffedGameFramework.Creatures.ConcreteCreatures;
+using ScuffedGameFramework.Creatures.CreatureDecorators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,57 +11,72 @@ namespace ScuffedGameFramework.Creatures
     public class CreatureFactory
     {
         private readonly World _world;
+        private readonly JsonTraceListener _logger;
         Random rnd = new Random();
-        public List<Position> FixedCreaturePositions { get; set; }
-        public List<Creature> MonsterList { get; set; }
+        public List<Creature> CreatureList { get; set; }
 
-        public CreatureFactory(World world, Creature player)
+        public CreatureFactory(World world, Creature player, JsonTraceListener logger)
         {
             _world = world;
-            FixedCreaturePositions = new List<Position>();
-            MonsterList = new List<Creature>();
-            MonsterList.Add(player);
+            _logger = logger;
+            CreatureList = new List<Creature>();
+            CreatureList.Add(player);
         }
 
         public Creature CreateCreature()
         {
+            Creature creature;
             switch (GenerateRace())
             {
                 case CreatureRace.Beast:
-                    Creature bear = new Bear(GeneratePosition());
-                    MonsterList.Add(bear);
-                    return bear;
+                    creature = new Bear(GeneratePosition());
+                    CreatureList.Add(creature);
+                    _logger.WriteLine($"Created Creature {creature.Name} at position {creature.Position}");
+                    return creature;
                 case CreatureRace.Humanoid:
-                    Creature kobold = new Kobold(GeneratePosition());
-                    MonsterList.Add(kobold);
-                    return kobold;
+                    creature = new Kobold(GeneratePosition());
+                    CreatureList.Add(creature);
+                    _logger.WriteLine($"Created Creature {creature.Name} at position {creature.Position}");
+                    return creature;
                 case CreatureRace.Undead:
-                    Creature skeleton = new Skeleton(GeneratePosition());
-                    MonsterList.Add(skeleton);
-                    return skeleton;
+                    creature = new Skeleton(GeneratePosition());
+                    CreatureList.Add(creature);
+                    _logger.WriteLine($"Created Creature {creature.Name} at position {creature.Position}");
+                    return creature;
                 case CreatureRace.Troll:
-                    Creature troll = new Troll(GeneratePosition());
-                    MonsterList.Add(troll);
-                    return troll;
+                    creature = new Troll(GeneratePosition());
+                    CreatureList.Add(creature);
+                    _logger.WriteLine($"Created Creature {creature.Name} at position {creature.Position}");
+
+                    return creature;
                 default:
                     return null;
             }
+        }
+
+        public void GenerateRandomBoss()
+        {
+            Creature creature;
+            int randomNumber = rnd.Next(CreatureList.Count);
+            creature = CreatureList[randomNumber];
+            creature = new EliteCreatureDecorator(creature);
+            CreatureList[randomNumber] = creature;
+
         }
 
         private Position GeneratePosition()
         {
             Position pos = new Position(rnd.Next(1, _world.MaxX - 1), rnd.Next(1, _world.MaxY - 1));
 
-
-            while (MonsterList.Exists(i => i.Position.Equals(pos)))
+            if (CreatureList.Exists(i => i.Position.Equals(pos)))
             {
-                pos = new Position(rnd.Next(1, _world.MaxX - 1), rnd.Next(1, _world.MaxY - 1));
+                pos = GeneratePosition();
+                if (CreatureList.Count > (_world.MaxX * _world.MaxY) / 2)
+                {
+                    throw new Exception("The world is too small for so many monsters.");
+                }
             }
 
-            if (MonsterList.Count > (_world.MaxX - 1) * (_world.MaxY - 1))
-            {
-                throw new Exception("The world is too small for so many monsters.");
-            }
             return pos;
         }
 

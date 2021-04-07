@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace ScuffedGameFramework.Creatures.CreatureDecorators
 {
-    class EliteCreatureDecorator : AbstractCreatureDecorator
+    public class EliteCreatureDecorator : AbstractCreatureDecorator
     {
         public EliteCreatureDecorator(Creature creature) : base(creature)
         {
             Name = "Elite " + creature.Name;
             HitPoints += 100;
             AttackPower += 5;
+            Color = ConsoleColor.Cyan;
+            WorldMarker = creature.WorldMarker;
+            Position = creature.Position;
         }
     }
 }

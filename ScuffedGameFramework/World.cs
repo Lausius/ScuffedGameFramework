@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScuffedGameFramework.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,17 +9,17 @@ namespace ScuffedGameFramework
 {
     public class World
     {
-        private char[,] _grid;
         public int MaxX { get; set; }
         public int MaxY { get; set; }
         private readonly string _horizontalLine;
+        private XMLReader.XmlLog _conf;
 
 
-        public World(int maxX, int maxY)
+        public World()
         {
-            _grid = new char[MaxX, MaxY];
-            MaxX = maxX;
-            MaxY = maxY;
+            _conf = XMLReader.ReadWorldConfiguration<XMLReader.XmlLog>();
+            MaxX = _conf.MaxX;
+            MaxY = _conf.MaxY;
             for (int x = 0; x < MaxX + 2; x++)
             {
                 _horizontalLine += "-";
@@ -40,9 +41,9 @@ namespace ScuffedGameFramework
             Console.Write(_horizontalLine);
         }
 
-        public bool IsPositionWalkable(Position pos)
+        public bool IsPositionWalkable(int x, int y)
         {
-            if (pos.X >= MaxX || pos.X <= 0 || pos.Y >= MaxY || pos.Y <= 0)
+            if (x >= MaxX || x < 1 || y >= MaxY + 1 || y < 1)
             {
                 return false;
             }

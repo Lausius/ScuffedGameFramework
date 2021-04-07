@@ -5,12 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ScuffedGameFramework
 {
     public abstract class Creature : ICreature
     {
+        private readonly JsonTraceListener _logger;
 
         #region Properties
         public int HitPoints { get; set; }
@@ -44,7 +46,7 @@ namespace ScuffedGameFramework
         /// </summary>
         public Creature()
         {
-
+            _logger = new JsonTraceListener("CombatLog.json");
         }
 
         public void DrawCreature()
@@ -59,22 +61,45 @@ namespace ScuffedGameFramework
 
         public void Hit(ICreature creature)
         {
-            creature.HitPoints -= AttackPower;
-            Console.WriteLine($"{Name} has hit {creature.Name} for {AttackPower} damage. {creature.Name} has {creature.HitPoints} HP left.");
+            creature.HitPoints -= AttackPower - ((Defense / 100) * AttackPower);
+            string battleText = $"{Name} has hit {creature.Name} for {AttackPower} damage. {creature.Name} has {creature.HitPoints} HP left.";
+            _logger.WriteLine(battleText);
+            Console.WriteLine(battleText);
         }
 
         public void ReceiveHit(ICreature creature)
         {
-            HitPoints -= creature.AttackPower;
-            Console.WriteLine($"{creature.Name} has hit {Name} for {creature.AttackPower} damage. Remaining health is {HitPoints}.");
+            HitPoints -= creature.AttackPower - ((Defense / 100) * AttackPower);
+            string battleText = $"{creature.Name} has hit {Name} for {creature.AttackPower} damage. Remaining health is {HitPoints}.";
+            _logger.WriteLine(battleText);
+            Console.WriteLine(battleText);
         }
 
         public void EngageFight(ICreature enemyCreature)
         {
+            Console.Clear();
             while (!Dead && !enemyCreature.Dead)
             {
                 Hit(enemyCreature);
-                ReceiveHit(enemyCreature);
+                Thread.Sleep(1000);
+
+                // Making sure enemy can't hit back if dead.
+                if (!enemyCreature.Dead)
+                {
+                    ReceiveHit(enemyCreature);
+                    Thread.Sleep(1000);
+                }
+            }
+
+            if (Dead)
+            {
+                Console.WriteLine("Player has died :(");
+            }
+            else
+            {
+                Console.WriteLine(Name + " is victoriuous! Press enter to continue...");
+                Console.ReadLine();
+                Console.Clear();
             }
         }
 

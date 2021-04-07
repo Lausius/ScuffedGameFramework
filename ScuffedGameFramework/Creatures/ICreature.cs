@@ -6,6 +6,7 @@ namespace ScuffedGameFramework
     public interface ICreature
     {
         int AttackPower { get; set; }
+        int Defense { get; set; }
         int HitPoints { get; set; }
         string Name { get; set; }
         bool Dead { get; }

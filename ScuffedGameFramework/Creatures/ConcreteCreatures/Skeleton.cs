@@ -18,6 +18,7 @@ namespace ScuffedGameFramework.Creatures.ConcreteCreatures
             CurrentWeapon = new LongSword();
             AttackPower = 10 + CurrentWeapon.Damage;
             Defense = 5 + CurrentArmor.Defense;
+            WorldMarker = "S";
         }
     }
 }
