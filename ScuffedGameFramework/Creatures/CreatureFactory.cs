@@ -1,5 +1,6 @@
 ﻿using ScuffedGameFramework.Creatures.ConcreteCreatures;
 using ScuffedGameFramework.Creatures.CreatureDecorators;
+using ScuffedGameFramework.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,39 +14,45 @@ namespace ScuffedGameFramework.Creatures
         private readonly World _world;
         private readonly JsonTraceListener _logger;
         Random rnd = new Random();
-        public List<Creature> CreatureList { get; set; }
+        public List<WorldObject> WorldObjects { get; set; }
 
         public CreatureFactory(World world, Creature player, JsonTraceListener logger)
         {
             _world = world;
             _logger = logger;
-            CreatureList = new List<Creature>();
-            CreatureList.Add(player);
+
+            WorldObjects = new List<WorldObject>();
+            WorldObjects.Add(player);
         }
 
+        // Maybe make an overloaded method to generate specific creature from creature race.
+        /// <summary>
+        /// Generates a random creature. 
+        /// </summary>
+        /// <returns>Creature</returns>
         public Creature CreateCreature()
         {
             Creature creature;
-            switch (GenerateRace())
+            switch (EnumValueGenerator.GenerateRace<CreatureRace>())
             {
                 case CreatureRace.Beast:
                     creature = new Bear(GeneratePosition());
-                    CreatureList.Add(creature);
+                    WorldObjects.Add(creature);
                     _logger.WriteLine($"Created Creature {creature.Name} at position {creature.Position}");
                     return creature;
                 case CreatureRace.Humanoid:
                     creature = new Kobold(GeneratePosition());
-                    CreatureList.Add(creature);
+                    WorldObjects.Add(creature);
                     _logger.WriteLine($"Created Creature {creature.Name} at position {creature.Position}");
                     return creature;
                 case CreatureRace.Undead:
                     creature = new Skeleton(GeneratePosition());
-                    CreatureList.Add(creature);
+                    WorldObjects.Add(creature);
                     _logger.WriteLine($"Created Creature {creature.Name} at position {creature.Position}");
                     return creature;
                 case CreatureRace.Troll:
                     creature = new Troll(GeneratePosition());
-                    CreatureList.Add(creature);
+                    WorldObjects.Add(creature);
                     _logger.WriteLine($"Created Creature {creature.Name} at position {creature.Position}");
 
                     return creature;
@@ -56,11 +63,11 @@ namespace ScuffedGameFramework.Creatures
 
         public void GenerateRandomBoss()
         {
-            Creature creature;
-            int randomNumber = rnd.Next(CreatureList.Count);
-            creature = CreatureList[randomNumber];
-            creature = new EliteCreatureDecorator(creature);
-            CreatureList[randomNumber] = creature;
+            Monster monster;
+            int randomNumber = rnd.Next(WorldObjects.Count);
+            monster = (Monster)WorldObjects[randomNumber];
+            monster = new EliteCreatureDecorator(monster, monster.Position);
+            WorldObjects[randomNumber] = monster;
 
         }
 
@@ -68,10 +75,10 @@ namespace ScuffedGameFramework.Creatures
         {
             Position pos = new Position(rnd.Next(1, _world.MaxX - 1), rnd.Next(1, _world.MaxY - 1));
 
-            if (CreatureList.Exists(i => i.Position.Equals(pos)))
+            if (WorldObjects.Exists(i => i.Position.Equals(pos)))
             {
                 pos = GeneratePosition();
-                if (CreatureList.Count > (_world.MaxX * _world.MaxY) / 2)
+                if (WorldObjects.Count > (_world.MaxX * _world.MaxY) / 2)
                 {
                     throw new Exception("The world is too small for so many monsters.");
                 }
@@ -79,12 +86,5 @@ namespace ScuffedGameFramework.Creatures
 
             return pos;
         }
-
-        private CreatureRace GenerateRace()
-        {
-            var enums = Enum.GetValues(typeof(CreatureRace));
-            return (CreatureRace)enums.GetValue(rnd.Next(enums.Length));
-        }
-
     }
 }

@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ScuffedGameFramework.Helpers;
 
 namespace ScuffedGameFramework.Items.Armor
 {
     class ArmorFactory : IArmorFactory
     {
-        private static Random _rng = new Random(Guid.NewGuid().GetHashCode());
 
         public IArmor Create()
         {
-            switch (GenerateArmorType())
+            switch (EnumValueGenerator.GenerateRace<ArmorType>())
             {
                 case ArmorType.Helmet:
                     return new LeatherHelmet();
@@ -24,12 +24,6 @@ namespace ScuffedGameFramework.Items.Armor
                 default:
                     return null;
             }
-        }
-
-        private ArmorType GenerateArmorType()
-        {
-            var enums = Enum.GetValues(typeof(ArmorType));
-            return (ArmorType)enums.GetValue(_rng.Next(enums.Length));
         }
     }
 }

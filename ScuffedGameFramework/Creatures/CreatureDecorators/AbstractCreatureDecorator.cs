@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace ScuffedGameFramework.Creatures.CreatureDecorators
 {
-    public abstract class AbstractCreatureDecorator : Creature
+    public abstract class AbstractCreatureDecorator : Monster
     {
-        public Creature Creature { get; set; }
-        public AbstractCreatureDecorator(Creature creature)
+        public Monster Monster { get; set; }
+        public AbstractCreatureDecorator(Monster monster, Position spawnPoint) : base(spawnPoint)
         {
-            Creature = creature;
-            WorldMarker = creature.WorldMarker;
-            Position = creature.Position;
-            CurrentArmor = creature.CurrentArmor;
-            CurrentWeapon = creature.CurrentWeapon;
+            Monster = monster;
+            WorldMarker = monster.WorldMarker;
+            Position = monster.Position;
+            CurrentArmor = monster.CurrentArmor;
+            CurrentWeapon = monster.CurrentWeapon;
 
         }
     }

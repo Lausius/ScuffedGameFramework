@@ -1,4 +1,6 @@
 ﻿using ScuffedGameFramework.Items;
+using ScuffedGameFramework.Items.Armor.ConcreteArmor;
+using ScuffedGameFramework.Items.Weapons.ConcreteWeapons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +11,17 @@ namespace ScuffedGameFramework.Creatures.PlayerClasses
 {
     public class Mage : Player
     {
+
         public int SpellPower { get; set; }
         public Mage(string name) : base(name)
         {
             Name = name;
             HitPoints = 130;
+            CurrentArmor = new Robe();
+            CurrentWeapon = new Staff();
             SpellPower = AttackPower;
             Defense += 5;
-            SpellPower += 30;
-
+            SpellPower += 40;
         }
 
         // Ignores defense, but is more fragile than the warrior.

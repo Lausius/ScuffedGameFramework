@@ -8,8 +8,18 @@ namespace ScuffedGameFramework
 {
     public class WorldObject
     {
-        public int Lootable { get; set; }
         public string Name { get; set; }
-        public bool Removeable { get; set; }
+
+        public Position Position { get; set; }
+        public ConsoleColor Color { get; set; }
+        public string WorldMarker { get; set; }
+
+        public void DrawWorldObject()
+        {
+            Console.ForegroundColor = Color;
+            Console.SetCursorPosition(Position.X, Position.Y);
+            Console.Write(WorldMarker);
+            Console.ResetColor();
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace GameTest
         {
             _world = new World();
             // WILL BE CLASS FACTORY
-            _player = new Mage("Lausius");
+            _player = new Warrior("Lausius");
 
             _logger = new JsonTraceListener();
             _creatureFactory = new CreatureFactory(_world, _player, _logger);
@@ -37,13 +37,13 @@ namespace GameTest
             }
         }
 
-        public void DrawCreatures()
+        public void DrawWorldObjects()
         {
-            _player.DrawCreature();
+            //_player.DrawCreature();
 
-            foreach (var creature in _creatureFactory.CreatureList)
+            foreach (var worldObject in _creatureFactory.WorldObjects)
             {
-                creature.DrawCreature();
+                worldObject.DrawWorldObject();
             }
         }
 
@@ -53,7 +53,7 @@ namespace GameTest
             Console.SetCursorPosition(0, 0);
             _world.DrawSquareWorld();
 
-            DrawCreatures();
+            DrawWorldObjects();
 
         }
 
@@ -113,13 +113,13 @@ namespace GameTest
 
         public void CheckForMonster()
         {
-            var playerVsMonster = _creatureFactory.CreatureList.FindAll(i => i.Position.Equals(_player.Position));
+            var playerVsMonster = _creatureFactory.WorldObjects.FindAll(i => i.Position.Equals(_player.Position));
 
             if (playerVsMonster.Count == 2)
             {
-                Creature monster = playerVsMonster.Find(i => i.Name != _player.Name);
+                Monster monster = (Monster)playerVsMonster.Find(i => i.Name != _player.Name);
                 _player.EngageFight(monster);
-                _creatureFactory.CreatureList.Remove(monster);
+                _creatureFactory.WorldObjects.Remove(monster);
             }
         }
     }

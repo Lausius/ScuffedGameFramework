@@ -1,4 +1,7 @@
 ﻿using ScuffedGameFramework.Items;
+using ScuffedGameFramework.Items.Armor.ConcreteArmor;
+using ScuffedGameFramework.Items.Weapons;
+using ScuffedGameFramework.Items.Weapons.ConcreteWeapons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +17,13 @@ namespace ScuffedGameFramework.Creatures.ConcreteCreatures
         {
             Name = name;
             HitPoints = 200;
+
+            CurrentWeapon = new BluntMace();
+            CurrentArmor = new WornShield();
+
             AttackPower += 10;
             Defense += 10;
+
 
         }
 

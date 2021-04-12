@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ScuffedGameFramework
 {
-    public abstract class Creature : ICreature
+    public abstract class Creature : WorldObject, ICreature
     {
         private readonly JsonTraceListener _logger;
         private IArmor _armor = null;
@@ -19,13 +19,6 @@ namespace ScuffedGameFramework
         #region Properties
         public int HitPoints { get; set; }
         public string BattleText { get; set; }
-        public string Name { get; set; }
-
-        #region WorldProperties
-        public Position Position { get; set; }
-        public ConsoleColor Color { get; set; }
-        public string WorldMarker { get; set; }
-        #endregion
 
         public bool Dead
         {
@@ -73,15 +66,10 @@ namespace ScuffedGameFramework
         public Creature()
         {
             _logger = new JsonTraceListener("CombatLog.json");
+
         }
 
-        public void DrawCreature()
-        {
-            Console.ForegroundColor = Color;
-            Console.SetCursorPosition(Position.X, Position.Y);
-            Console.Write(WorldMarker);
-            Console.ResetColor();
-        }
+
 
         public void LogBattleText(string battleText)
         {
