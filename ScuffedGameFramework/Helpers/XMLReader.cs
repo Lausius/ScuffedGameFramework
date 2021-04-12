@@ -12,8 +12,8 @@ namespace ScuffedGameFramework.Helpers
     {
         public class XmlLog
         {
-            public int MaxX { get; set; }
-            public int MaxY { get; set; }
+            public Area MaxX { get; set; }
+            public Area MaxY { get; set; }
             public XmlLog()
             {
 

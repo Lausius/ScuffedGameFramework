@@ -9,8 +9,8 @@ namespace ScuffedGameFramework
 {
     public class World
     {
-        public int MaxX { get; set; }
-        public int MaxY { get; set; }
+        public Area MaxX { get; set; }
+        public Area MaxY { get; set; }
         private readonly string _horizontalLine;
         private XMLReader.XmlLog _conf;
 
@@ -18,8 +18,8 @@ namespace ScuffedGameFramework
         public World()
         {
             _conf = XMLReader.ReadWorldConfiguration<XMLReader.XmlLog>();
-            MaxX = _conf.MaxX;
-            MaxY = _conf.MaxY;
+            MaxX = new Area(_conf.MaxX.Value);
+            MaxY = new Area(_conf.MaxY.Value);
             for (int x = 0; x < MaxX + 2; x++)
             {
                 _horizontalLine += "-";
