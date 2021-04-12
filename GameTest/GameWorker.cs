@@ -15,7 +15,6 @@ namespace GameTest
     {
         private World _world;
         private Creature _player;
-        private Random _rnd;
         private readonly JsonTraceListener _logger;
         private CreatureFactory _creatureFactory;
 
@@ -23,7 +22,7 @@ namespace GameTest
         {
             _world = new World();
             // WILL BE CLASS FACTORY
-            _player = new Warrior("Lausius");
+            _player = new Mage("Lausius");
 
             _logger = new JsonTraceListener();
             _creatureFactory = new CreatureFactory(_world, _player, _logger);

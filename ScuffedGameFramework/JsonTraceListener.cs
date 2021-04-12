@@ -17,7 +17,7 @@ namespace ScuffedGameFramework
             _logPath = logPath;
         }
 
-        public override void Write(string? message)
+        public override void Write(string message)
         {
             StreamWriter stream = new StreamWriter("_logPath", true);
             using (stream)
@@ -28,7 +28,7 @@ namespace ScuffedGameFramework
             }
         }
 
-        public override void WriteLine(string? message)
+        public override void WriteLine(string message)
         {
             StreamWriter stream = new StreamWriter(_logPath, true);
             using (stream)

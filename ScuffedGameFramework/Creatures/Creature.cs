@@ -91,6 +91,14 @@ namespace ScuffedGameFramework
         #region Behavior
         public abstract void FightingStyle(ICreature creature);
 
+        public int CalculateResistedDamage(double damage, double defense)
+        {
+            //Bad practice i know :(
+            double defenseModifier = defense != 0 ? defense / 100 : 0;
+            double totalDamage = damage - (defenseModifier * damage);
+            return (int)totalDamage;
+        }
+
         public void Hit(ICreature creature)
         {
             FightingStyle(creature);

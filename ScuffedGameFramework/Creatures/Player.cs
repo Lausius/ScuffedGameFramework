@@ -17,6 +17,7 @@ namespace ScuffedGameFramework.Creatures
             CurrentWeapon = _itemAbstractFactory.GenerateWeapon();
             CurrentArmor = _itemAbstractFactory.GenerateArmor();
 
+
             Position = new Position(1, 1);
             Color = ConsoleColor.Green;
             WorldMarker = "O";

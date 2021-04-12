@@ -24,9 +24,9 @@ namespace ScuffedGameFramework.Creatures.ConcreteCreatures
         public override void FightingStyle(ICreature creature)
         {
             // maybe implement critical strike :) 
-            creature.HitPoints -= AttackPower - ((Defense / 100) * AttackPower);
-            BattleText = $"{Name} has hit {creature.Name} with a {CurrentWeapon} for {AttackPower} damage. {creature.Name} has {creature.HitPoints} HP left.";
-
+            int totalDamage = CalculateResistedDamage(AttackPower, creature.Defense);
+            creature.HitPoints -= totalDamage;
+            BattleText = $"{Name} has hit {creature.Name} with a {CurrentWeapon} for a total of {totalDamage} damage. {creature.Name} has {creature.HitPoints} HP left.";
         }
     }
 }

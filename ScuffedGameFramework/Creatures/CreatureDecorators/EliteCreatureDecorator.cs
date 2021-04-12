@@ -19,12 +19,13 @@ namespace ScuffedGameFramework.Creatures.CreatureDecorators
 
         public override void FightingStyle(ICreature player)
         {
+            int totalDamage = CalculateResistedDamage(AttackPower, player.Defense);
             for (int i = 0; i < 2; i++)
             {
                 // hits 2 times cuz boss?
-                player.HitPoints -= AttackPower - ((Defense / 100) * AttackPower);
+                player.HitPoints -= totalDamage;
             }
-            BattleText = $"{Name} has hit {player.Name} 2 times for a total of {AttackPower * 2} damage. Remaining health is {player.HitPoints}.";
+            BattleText = $"{Name} has hit {player.Name} 2 times for a total of {totalDamage * 2} damage. Remaining health is now {player.HitPoints}.";
         }
     }
 }
