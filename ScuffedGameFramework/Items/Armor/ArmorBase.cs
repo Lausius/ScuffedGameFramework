@@ -8,7 +8,7 @@ namespace ScuffedGameFramework.Items.Armor
 {
     public abstract class ArmorBase : IArmor
     {
-        public abstract string Name { get; }
-        public abstract int Defense { get; }
+        public virtual string Name { get; }
+        public virtual int Defense { get; }
     }
 }

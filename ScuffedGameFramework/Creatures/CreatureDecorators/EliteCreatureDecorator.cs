@@ -20,7 +20,7 @@ namespace ScuffedGameFramework.Creatures.CreatureDecorators
 
         public override void FightingStyle(ICreature player)
         {
-            int totalDamage = CalculateResistedDamage(AttackPower, player.Defense);
+            int totalDamage = CalculateResistedDamage(AttackPower, player.CurrentArmor.Defense);
             for (int i = 0; i < 2; i++)
             {
                 // hits 2 times cuz boss?

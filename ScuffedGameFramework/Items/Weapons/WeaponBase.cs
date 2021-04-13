@@ -8,8 +8,8 @@ namespace ScuffedGameFramework.Items.Weapons
 {
     public abstract class WeaponBase : IWeapon
     {
-        public abstract string Name { get; }
-        public abstract int Damage { get; }
+        public virtual string Name { get; }
+        public virtual int Damage { get; }
 
         public override string ToString()
         {

@@ -1,10 +1,12 @@
 ﻿using ScuffedGameFramework.Items;
 using ScuffedGameFramework.Items.Armor;
+using ScuffedGameFramework.Items.CompositeItems;
 using ScuffedGameFramework.Items.Weapons;
 using System.Collections.Generic;
 
 namespace ScuffedGameFramework
 {
+    // Should probably add some restrictions...
     public interface ICreature
     {
         int AttackPower { get; set; }
@@ -12,8 +14,8 @@ namespace ScuffedGameFramework
         int HitPoints { get; set; }
         string Name { get; set; }
         bool Dead { get; }
-        IWeapon CurrentWeapon { get; set; }
-        IArmor CurrentArmor { get; set; }
+        CompositeArmor CurrentArmor { get; set; }
+        CompositeWeapon CurrentWeapon { get; set; }
 
         void Hit(ICreature creature);
         //void ReceiveHit(ICreature creature);

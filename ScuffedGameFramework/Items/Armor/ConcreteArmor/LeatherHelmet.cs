@@ -10,7 +10,7 @@ namespace ScuffedGameFramework.Items.Armor.ConcreteArmor
     {
         public override string Name
         {
-            get { return "Sturdy Leahter Helmet"; }
+            get { return "Sturdy Leather Helmet"; }
         }
 
         public override int Defense

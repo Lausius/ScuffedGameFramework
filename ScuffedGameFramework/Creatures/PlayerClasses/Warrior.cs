@@ -1,4 +1,5 @@
 ﻿using ScuffedGameFramework.Items;
+using ScuffedGameFramework.Items.Armor;
 using ScuffedGameFramework.Items.Armor.ConcreteArmor;
 using ScuffedGameFramework.Items.Weapons;
 using ScuffedGameFramework.Items.Weapons.ConcreteWeapons;
@@ -12,17 +13,15 @@ namespace ScuffedGameFramework.Creatures.ConcreteCreatures
 {
     public class Warrior : Player
     {
-
         public Warrior(string name) : base(name)
         {
             Name = name;
             HitPoints = 200;
 
-            CurrentWeapon = new BluntMace();
-            CurrentArmor = new WornShield();
+            CurrentWeapon.AddWeapon(WeaponFactory.GenerateWeapon());
+            CurrentArmor.AddArmor(ArmorFactory.GenerateArmor());
 
-            AttackPower += 10;
-            Defense += 10;
+            AttackPower = 10;
 
 
         }

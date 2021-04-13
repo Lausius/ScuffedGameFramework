@@ -1,5 +1,6 @@
 ﻿using ScuffedGameFramework.Items;
 using ScuffedGameFramework.Items.Armor;
+using ScuffedGameFramework.Items.CompositeItems;
 using ScuffedGameFramework.Items.Weapons;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,8 @@ namespace ScuffedGameFramework
     public abstract class Creature : WorldObject, ICreature
     {
         private readonly JsonTraceListener _logger;
-        private IArmor _armor = null;
-        private IWeapon _weapon = null;
+        private int _defense;
+        private int _attackPower;
 
         #region Properties
         public int HitPoints { get; set; }
@@ -29,35 +30,31 @@ namespace ScuffedGameFramework
         }
 
         // Determines how hard the creature hits.
-        public int AttackPower { get; set; }
-        public int Defense { get; set; }
-
-        // Should maybe be a list?
-        public IWeapon CurrentWeapon
+        public int AttackPower
         {
-            get { return _weapon; }
+            get
+            {
+                return _attackPower + CurrentWeapon.Damage;
+            }
             set
             {
-                _weapon = value;
-                if (_weapon is not null)
-                {
-                    AttackPower += _weapon.Damage;
-                }
+                _attackPower = value;
+            }
+        }
+        public int Defense
+        {
+            get
+            {
+                return _defense + CurrentArmor.Defense;
+            }
+            set
+            {
+                _defense = value;
             }
         }
 
-        public IArmor CurrentArmor
-        {
-            get { return _armor; }
-            set
-            {
-                _armor = value;
-                if (_armor is not null)
-                {
-                    Defense += _armor.Defense;
-                }
-            }
-        }
+        public CompositeWeapon CurrentWeapon { get; set; }
+        public CompositeArmor CurrentArmor { get; set; }
         #endregion
 
         /// <summary>
@@ -66,10 +63,10 @@ namespace ScuffedGameFramework
         public Creature()
         {
             _logger = new JsonTraceListener("CombatLog.json");
+            CurrentArmor = new CompositeArmor();
+            CurrentWeapon = new CompositeWeapon();
 
         }
-
-
 
         public void LogBattleText(string battleText)
         {
@@ -94,11 +91,6 @@ namespace ScuffedGameFramework
             LogBattleText(BattleText);
         }
 
-        //public void ReceiveHit(ICreature creature)
-        //{
-        //    HitPoints -= creature.AttackPower - ((Defense / 100) * AttackPower);
-
-        //}
 
         public void EngageFight(ICreature enemyCreature)
         {

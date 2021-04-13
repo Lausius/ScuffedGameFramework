@@ -64,7 +64,7 @@ namespace ScuffedGameFramework.Creatures
         public void GenerateRandomBoss()
         {
             Monster monster;
-            int randomNumber = rnd.Next(WorldObjects.Count);
+            int randomNumber = rnd.Next(1, WorldObjects.Count);
             monster = (Monster)WorldObjects[randomNumber];
             monster = new EliteCreatureDecorator(monster, monster.Position);
             WorldObjects[randomNumber] = monster;

@@ -8,10 +8,10 @@ using ScuffedGameFramework.Helpers;
 
 namespace ScuffedGameFramework.Items.Armor
 {
-    class ArmorFactory : IArmorFactory
+    class ArmorFactory
     {
 
-        public IArmor Create()
+        public static IArmor GenerateArmor()
         {
             switch (EnumValueGenerator.GenerateRace<ArmorType>())
             {

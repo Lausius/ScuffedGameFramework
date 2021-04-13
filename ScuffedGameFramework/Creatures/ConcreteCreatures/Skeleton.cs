@@ -14,8 +14,8 @@ namespace ScuffedGameFramework.Creatures.ConcreteCreatures
         {
             Name = "Old Skeleton";
             HitPoints = 50;
-            CurrentArmor = new WornShield();
-            CurrentWeapon = new LongSword();
+            CurrentArmor.AddArmor(new WornShield());
+            CurrentWeapon.AddWeapon(new LongSword());
 
             WorldMarker = "S";
         }

@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace ScuffedGameFramework.Items.Weapons
 {
-    public class WeaponFactory : IWeaponFactory
+    public class WeaponFactory
     {
 
-        public IWeapon Create()
+        public static IWeapon GenerateWeapon()
         {
             switch (EnumValueGenerator.GenerateRace<WeaponType>())
             {

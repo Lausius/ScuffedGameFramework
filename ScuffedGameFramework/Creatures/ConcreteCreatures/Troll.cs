@@ -14,7 +14,7 @@ namespace ScuffedGameFramework.Creatures.ConcreteCreatures
             Name = "Green Troll";
             HitPoints = 80;
             AttackPower = 20;
-            CurrentWeapon = new BluntMace();
+            CurrentWeapon.AddWeapon(new BluntMace());
             WorldMarker = "T";
         }
     }

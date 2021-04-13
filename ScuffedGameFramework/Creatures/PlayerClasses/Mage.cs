@@ -17,10 +17,9 @@ namespace ScuffedGameFramework.Creatures.PlayerClasses
         {
             Name = name;
             HitPoints = 130;
-            CurrentArmor = new Robe();
-            CurrentWeapon = new Staff();
+            CurrentArmor.AddArmor(new Robe());
+            CurrentWeapon.AddWeapon(new Staff());
             SpellPower = AttackPower;
-            Defense += 5;
             SpellPower += 40;
         }
 
