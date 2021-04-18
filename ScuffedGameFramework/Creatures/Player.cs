@@ -14,7 +14,8 @@ namespace ScuffedGameFramework.Creatures
         {
             Name = name;
 
-
+            Defense = 10;
+            AttackPower = 10;
             Position = new Position(1, 1);
             Color = ConsoleColor.Green;
             WorldMarker = "O";

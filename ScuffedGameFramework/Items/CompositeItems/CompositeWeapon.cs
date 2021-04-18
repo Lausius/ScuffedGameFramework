@@ -26,7 +26,7 @@ namespace ScuffedGameFramework.Items.CompositeItems
         public void AddWeapon(IWeapon item)
         {
             var weapon = EquippedWeapons.FindAll(a => a.GetType() == item.GetType());
-            if (weapon.Count < 1)
+            if (weapon.Count <= 2)
             {
                 EquippedWeapons.Add(item);
                 //Console.WriteLine($"{item.Name} has been equipped! Total attack power is now: {Damage}");

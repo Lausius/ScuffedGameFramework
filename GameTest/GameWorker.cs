@@ -39,6 +39,7 @@ namespace GameTest
 
         public void DrawWorldObjects()
         {
+
             foreach (var worldObject in _creatureFactory.WorldObjects)
             {
                 worldObject.DrawWorldObject();

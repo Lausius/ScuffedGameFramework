@@ -17,7 +17,7 @@ namespace ScuffedGameFramework.Creatures
 
         public override void FightingStyle(ICreature player)
         {
-            int totalDamage = CalculateResistedDamage(AttackPower, player.Defense);
+            int totalDamage = CalculateResistedDamage(player);
             player.HitPoints -= totalDamage;
             BattleText = $"{Name} has hit {player.Name} for a total of {totalDamage} damage. Remaining health is now {player.HitPoints}.";
         }

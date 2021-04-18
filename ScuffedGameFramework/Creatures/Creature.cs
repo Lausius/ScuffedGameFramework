@@ -14,8 +14,6 @@ namespace ScuffedGameFramework
     public abstract class Creature : WorldObject, ICreature
     {
         private readonly JsonTraceListener _logger;
-        private int _defense;
-        private int _attackPower;
 
         #region Properties
         public int HitPoints { get; set; }
@@ -32,26 +30,12 @@ namespace ScuffedGameFramework
         // Determines how hard the creature hits.
         public int AttackPower
         {
-            get
-            {
-                return _attackPower + CurrentWeapon.Damage;
-            }
-            set
-            {
-                _attackPower = value;
-            }
-        }
+            get; set;
+        } = 5;
         public int Defense
         {
-            get
-            {
-                return _defense + CurrentArmor.Defense;
-            }
-            set
-            {
-                _defense = value;
-            }
-        }
+            get; set;
+        } = 5;
 
         public CompositeWeapon CurrentWeapon { get; set; }
         public CompositeArmor CurrentArmor { get; set; }
@@ -76,12 +60,15 @@ namespace ScuffedGameFramework
         #region Behavior
         public abstract void FightingStyle(ICreature creature);
 
-        public int CalculateResistedDamage(double damage, double defense)
+        public int CalculateResistedDamage(ICreature creature)
         {
             //Bad practice i know :(
-            double defenseModifier = defense != 0 ? defense / 100 : 0;
-            double totalDamage = damage - (defenseModifier * damage);
-            return (int)totalDamage;
+            double totalDefense = creature.Defense + creature.CurrentArmor.Defense;
+            double defenseModifier = totalDefense != 0 ? totalDefense / 100 : 0;
+
+            double totalDamage = AttackPower + CurrentWeapon.Damage;
+            double calculatedDamage = totalDamage - (defenseModifier * totalDamage);
+            return (int)calculatedDamage;
         }
 
         public void Hit(ICreature creature)

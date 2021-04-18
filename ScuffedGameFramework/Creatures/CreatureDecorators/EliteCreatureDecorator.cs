@@ -13,14 +13,14 @@ namespace ScuffedGameFramework.Creatures.CreatureDecorators
         {
             Name = "Elite " + monster.Name;
             HitPoints = 100 + monster.HitPoints;
-            AttackPower = 5 + monster.AttackPower;
+            AttackPower += 5;
             Color = ConsoleColor.Cyan;
 
         }
 
         public override void FightingStyle(ICreature player)
         {
-            int totalDamage = CalculateResistedDamage(AttackPower, player.CurrentArmor.Defense);
+            int totalDamage = CalculateResistedDamage(player);
             for (int i = 0; i < 2; i++)
             {
                 // hits 2 times cuz boss?

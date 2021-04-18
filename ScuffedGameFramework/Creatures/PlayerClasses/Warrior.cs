@@ -21,7 +21,6 @@ namespace ScuffedGameFramework.Creatures.ConcreteCreatures
             CurrentWeapon.AddWeapon(WeaponFactory.GenerateWeapon());
             CurrentArmor.AddArmor(ArmorFactory.GenerateArmor());
 
-            AttackPower = 10;
 
 
         }
@@ -31,9 +30,9 @@ namespace ScuffedGameFramework.Creatures.ConcreteCreatures
         public override void FightingStyle(ICreature creature)
         {
             // maybe implement critical strike :) 
-            int totalDamage = CalculateResistedDamage(AttackPower, creature.Defense);
+            int totalDamage = CalculateResistedDamage(creature);
             creature.HitPoints -= totalDamage;
-            BattleText = $"{Name} has hit {creature.Name} with a {CurrentWeapon} for a total of {totalDamage} damage. {creature.Name} has {creature.HitPoints} HP left.";
+            BattleText = $"{Name} has hit {creature.Name} with a {CurrentWeapon.EquippedWeapons[0]} for a total of {totalDamage} damage. {creature.Name} has {creature.HitPoints} HP left.";
         }
     }
 }
