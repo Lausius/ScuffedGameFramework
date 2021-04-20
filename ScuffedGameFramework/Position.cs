@@ -13,8 +13,15 @@ namespace ScuffedGameFramework
 
         public Position(int x, int y)
         {
-            X = x;
-            Y = y;
+            if (x < 0 || y < 0)
+            {
+                throw new Exception("Coordinates must not be negative.");
+            }
+            else
+            {
+                X = x;
+                Y = y;
+            }
         }
 
         public override int GetHashCode()
