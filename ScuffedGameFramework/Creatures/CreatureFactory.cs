@@ -14,14 +14,14 @@ namespace ScuffedGameFramework.Creatures
         private readonly World _world;
         private readonly JsonTraceListener _logger;
         Random rnd = new Random();
-        public List<WorldObject> WorldObjects { get; set; }
+        public List<IWorldObject> WorldObjects { get; set; }
 
         public CreatureFactory(World world, Creature player, JsonTraceListener logger)
         {
             _world = world;
             _logger = logger;
 
-            WorldObjects = new List<WorldObject>();
+            WorldObjects = new List<IWorldObject>();
             WorldObjects.Add(player);
         }
 

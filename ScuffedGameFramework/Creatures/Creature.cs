@@ -32,6 +32,7 @@ namespace ScuffedGameFramework
         {
             get; set;
         } = 5;
+
         public int Defense
         {
             get; set;

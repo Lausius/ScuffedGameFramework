@@ -20,7 +20,7 @@ namespace ScuffedGameFramework
 
         public Area(int value)
         {
-            if (value >= 0 || value <= 40)
+            if (value >= 0 && value <= 40)
             {
                 Value = value;
             }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ScuffedGameFramework
 {
-    public class WorldObject
+    public class WorldObject : IWorldObject
     {
         public string Name { get; set; }
 
