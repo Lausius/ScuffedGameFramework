@@ -18,7 +18,7 @@ namespace ScuffedGameFramework.Creatures
             AttackPower = 10;
             Position = new Position(1, 1);
             Color = ConsoleColor.Green;
-            WorldMarker = "O";
+            WorldMarker = 'O';
         }
 
     }

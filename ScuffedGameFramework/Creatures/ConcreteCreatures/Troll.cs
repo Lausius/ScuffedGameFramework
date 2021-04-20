@@ -15,7 +15,7 @@ namespace ScuffedGameFramework.Creatures.ConcreteCreatures
             HitPoints = 80;
             AttackPower = 20;
             CurrentWeapon.AddWeapon(new BluntMace());
-            WorldMarker = "T";
+            WorldMarker = 'T';
         }
     }
 }

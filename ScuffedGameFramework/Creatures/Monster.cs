@@ -11,7 +11,7 @@ namespace ScuffedGameFramework.Creatures
         public Monster(Position spawnPoint)
         {
             Position = spawnPoint;
-            WorldMarker = "X";
+            WorldMarker = 'T';
             Color = ConsoleColor.Red;
         }
 

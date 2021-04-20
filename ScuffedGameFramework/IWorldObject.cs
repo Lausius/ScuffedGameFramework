@@ -7,7 +7,7 @@ namespace ScuffedGameFramework
         ConsoleColor Color { get; set; }
         string Name { get; set; }
         Position Position { get; set; }
-        string WorldMarker { get; set; }
+        char WorldMarker { get; set; }
 
         void DrawWorldObject();
     }

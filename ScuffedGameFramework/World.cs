@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ScuffedGameFramework
 {
-    public class World
+    public class World : IWorld
     {
         public Area MaxX { get; set; }
         public Area MaxY { get; set; }

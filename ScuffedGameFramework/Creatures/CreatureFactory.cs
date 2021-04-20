@@ -11,12 +11,12 @@ namespace ScuffedGameFramework.Creatures
 {
     public class CreatureFactory
     {
-        private readonly World _world;
+        private readonly IWorld _world;
         private readonly JsonTraceListener _logger;
         Random rnd = new Random();
         public List<IWorldObject> WorldObjects { get; set; }
 
-        public CreatureFactory(World world, Creature player, JsonTraceListener logger)
+        public CreatureFactory(IWorld world, Player player, JsonTraceListener logger)
         {
             _world = world;
             _logger = logger;

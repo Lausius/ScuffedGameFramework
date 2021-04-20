@@ -17,7 +17,7 @@ namespace ScuffedGameFramework.Creatures.ConcreteCreatures
             CurrentArmor.AddArmor(new WornShield());
             CurrentWeapon.AddWeapon(new LongSword());
 
-            WorldMarker = "S";
+            WorldMarker = 'S';
         }
     }
 }

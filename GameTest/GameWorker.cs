@@ -14,7 +14,7 @@ namespace GameTest
     public class GameWorker
     {
         private World _world;
-        private Creature _player;
+        private Player _player;
         private readonly JsonTraceListener _logger;
         private CreatureFactory _creatureFactory;
 

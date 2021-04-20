@@ -13,7 +13,7 @@ namespace ScuffedGameFramework.Creatures.ConcreteCreatures
             Name = "Black Bear";
             HitPoints = 60;
             AttackPower = 15;
-            WorldMarker = "B";
+            WorldMarker = 'B';
         }
     }
 }
