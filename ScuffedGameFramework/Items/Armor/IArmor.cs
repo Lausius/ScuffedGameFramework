@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace ScuffedGameFramework.Items.Armor
 {
-    public interface IArmor
+    public interface IArmor : IItem
     {
-        string Name { get; }
         int Defense { get; }
     }
 }

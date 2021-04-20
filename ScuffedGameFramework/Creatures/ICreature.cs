@@ -7,12 +7,11 @@ using System.Collections.Generic;
 namespace ScuffedGameFramework
 {
     // Should probably add some restrictions...
-    public interface ICreature
+    public interface ICreature : IWorldObject
     {
         int AttackPower { get; set; }
         int Defense { get; set; }
         int HitPoints { get; set; }
-        string Name { get; set; }
         bool Dead { get; }
         CompositeArmor CurrentArmor { get; set; }
         CompositeWeapon CurrentWeapon { get; set; }
